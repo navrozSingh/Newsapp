@@ -56,6 +56,7 @@ struct TopHeadlines: View {
                 }
             ))
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 extension TopHeadlines {

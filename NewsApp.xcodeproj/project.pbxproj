@@ -67,6 +67,7 @@
 		033460A5242D13410090465F /* CountryModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryModal.swift; sourceTree = "<group>"; };
 		033460A7242D20B20090465F /* Countries.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Countries.json; sourceTree = "<group>"; };
 		033460A9242D20F80090465F /* CountriesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesVM.swift; sourceTree = "<group>"; };
+		0369064024442EB800B70A0F /* NewsApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NewsApp.entitlements; sourceTree = "<group>"; };
 		9682C6837A5DB0ACAB81C388 /* Pods_NewsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NewsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C98670105978742BB5EACE29 /* Pods-NewsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsApp.release.xcconfig"; path = "Target Support Files/Pods-NewsApp/Pods-NewsApp.release.xcconfig"; sourceTree = "<group>"; };
 		E7AABF892E5EBED1D6024D78 /* Pods-NewsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsApp.debug.xcconfig"; path = "Target Support Files/Pods-NewsApp/Pods-NewsApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -140,6 +141,7 @@
 		03346079242BB9FD0090465F /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
+				0369064024442EB800B70A0F /* NewsApp.entitlements */,
 				0334609E242C6B770090465F /* Helpers */,
 				03346093242BC9250090465F /* Networking */,
 				03346092242BC8EE0090465F /* ViewModals */,
@@ -509,17 +511,20 @@
 			baseConfigurationReference = E7AABF892E5EBED1D6024D78 /* Pods-NewsApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = NewsApp/NewsApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"NewsApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 47R8888XGW;
+				DEVELOPMENT_TEAM = 8N26A58ZD7;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = NewsApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.NewsApp;
+				PRODUCT_BUNDLE_IDENTIFIER = XDPAYBNDL;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -530,17 +535,20 @@
 			baseConfigurationReference = C98670105978742BB5EACE29 /* Pods-NewsApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = NewsApp/NewsApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"NewsApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 47R8888XGW;
+				DEVELOPMENT_TEAM = 8N26A58ZD7;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = NewsApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.NewsApp;
+				PRODUCT_BUNDLE_IDENTIFIER = XDPAYBNDL;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

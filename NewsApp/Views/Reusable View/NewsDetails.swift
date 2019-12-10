@@ -53,5 +53,7 @@ struct NewsDetails: View {
                         self.showSheetView.toggle()
             }) {Text("Done").bold()})
         }
+        .navigationViewStyle(StackNavigationViewStyle())
+
     }
 }

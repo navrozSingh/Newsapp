@@ -58,5 +58,4 @@ struct Sources : Codable,Identifiable, Equatable, Hashable {
         language = try values.decodeIfPresent(String.self, forKey: .language)
         country = try values.decodeIfPresent(String.self, forKey: .country)
     }
-
 }

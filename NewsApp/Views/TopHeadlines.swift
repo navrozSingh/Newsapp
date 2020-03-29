@@ -17,14 +17,6 @@ struct TopHeadlines: View {
     @State private var selectedArticle: Articles?
     @State private var presentArticle = false
     var body: some View {
-//        let drag = DragGesture()
-//            .onEnded {
-//                if $0.translation.width < -100 {
-//                    withAnimation {
-//                        self.topHeadlinesVM.openMenu = false
-//                    }
-//                }
-//            }
         return NavigationView() {
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
@@ -46,6 +38,8 @@ struct TopHeadlines: View {
                 }.sheet(isPresented: self.$presentArticle) {
                     NewsDetails(article: self.selectedArticle!,showSheetView: self.$presentArticle)
                 }
+            }.onAppear(){
+                self.topHeadlinesVM.fetchHeadlines()
             }
             .navigationBarTitle("Top Headlines from \(self.topHeadlinesVM.selectedCountry.longName)", displayMode: .inline)
         
@@ -91,3 +85,13 @@ struct TopHeadlinesCell: View {
         }
     }
 }
+//TODO: Gester implementation
+
+//        let drag = DragGesture()
+//            .onEnded {
+//                if $0.translation.width < -100 {
+//                    withAnimation {
+//                        self.topHeadlinesVM.openMenu = false
+//                    }
+//                }
+//            }

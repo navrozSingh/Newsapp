@@ -23,8 +23,9 @@ struct SourcesModal : Codable {
 
 }
 
-struct Sources : Codable,Identifiable, Equatable {
+struct Sources : Codable,Identifiable, Equatable, Hashable {
     let id  = UUID()
+    var stringID  = ""
     let name : String?
     let description : String?
     let url : String?
@@ -38,7 +39,7 @@ struct Sources : Codable,Identifiable, Equatable {
 
     enum CodingKeys: String, CodingKey {
 
-//        case id = "id"
+        case stringID = "id"
         case name = "name"
         case description = "description"
         case url = "url"
@@ -49,7 +50,7 @@ struct Sources : Codable,Identifiable, Equatable {
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-//        id = try values.decodeIfPresent(String.self, forKey: .id)
+        stringID = try (values.decodeIfPresent(String.self, forKey: .stringID) ?? "NA")
         name = try values.decodeIfPresent(String.self, forKey: .name)
         description = try values.decodeIfPresent(String.self, forKey: .description)
         url = try values.decodeIfPresent(String.self, forKey: .url)

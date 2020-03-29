@@ -14,7 +14,7 @@ class SourcesVM : ObservableObject {
     @Published var sources = [Sources]()
     @Published var loading = true
     init() {
-        fetchSources()
+        //fetchSources()
     }
     func fetchSources() {
         guard let url = URL(string: Endpoints.Sources.rawValue) else {

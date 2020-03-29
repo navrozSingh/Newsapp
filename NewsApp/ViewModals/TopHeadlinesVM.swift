@@ -20,7 +20,7 @@ class TopHeadlinesVM : ObservableObject {
     }
     @Published var openMenu = false
     init() {
-        fetchHeadlines()
+        //fetchHeadlines()
     }
     func fetchHeadlines() {
         guard let url = URL(string: Endpoints.TopHeadings.rawValue + selectedCountry.shortName) else {

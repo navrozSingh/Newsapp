@@ -22,11 +22,11 @@ struct SourceNews: View {
             ZStack(alignment: .leading) {
                 LoadingView(isShowing: self.$sourceNewsVM.loading) {
                     List(self.sourceNewsVM.articles ) { article in
-                        TopHeadlinesCell(article: article, selectedArticle: self.$selectedArticle)
+                        TopHeadlinesCell(article: article, cellTapped: self.$presentArticle, selectedArticle: self.$selectedArticle)
                     }
-                    .onTapGesture {
-                        self.presentArticle.toggle()
-                    }
+//                    .onTapGesture {
+//                        self.presentArticle.toggle()
+//                    }
                 }
             }.onAppear {
                 self.sourceNewsVM.fetchNewsForSource()

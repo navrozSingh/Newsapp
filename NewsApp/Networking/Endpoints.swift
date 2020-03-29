@@ -12,5 +12,5 @@ enum Endpoints: String {
     case TopHeadings = "http://newsapi.org/v2/top-headlines?country="
     case Sources = "https://newsapi.org/v2/sources"
     case SourcesNew = "http://newsapi.org/v2/top-headlines?sources="
-
+    case query = "https://newsapi.org/v2/everything?q="
 }

@@ -20,10 +20,11 @@ struct TopHeadlines: View {
                 ZStack(alignment: .leading) {
                     LoadingView(isShowing: self.$topHeadlinesVM.loading) {
                         List(self.topHeadlinesVM.articles ) { article in
-                            TopHeadlinesCell(article: article, selectedArticle: self.$selectedArticle)
-                        }.onTapGesture {
-                            self.presentArticle.toggle()
+                            TopHeadlinesCell(article: article,cellTapped:self.$presentArticle  ,selectedArticle: self.$selectedArticle)
                         }
+//                        .onTapGesture {
+//                            self.presentArticle.toggle()
+//                        }
                     }
                     .frame(width: geometry.size.width, height: geometry.size.height)
                     .offset(x: self.topHeadlinesVM.openMenu ? geometry.size.width/2 : 0)

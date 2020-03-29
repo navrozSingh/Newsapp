@@ -11,26 +11,24 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView(){
-  //          NavigationView() {
-                TopHeadlines()
-//            }.padding(.top, -100)
-//                .navigationBarHidden(true)
-
+            TopHeadlines()
             .tabItem {
                     Image(systemName: "pencil.and.outline")
                     Text("Headlines")
                 }
-//            NavigationView() {
+            
                 SourcesView()
-//            }
-//            .padding(.top, -100)
-//                .navigationBarTitle("s ", displayMode: .inline)
-
-
                 .tabItem {
                     Image(systemName: "antenna.radiowaves.left.and.right")
                     Text("Sources")
             }
+            
+                SearchView()
+                .tabItem {
+                    Image(systemName: "magnifyingglass")
+                    Text("Sources")
+            }
+
         }
     }
 }

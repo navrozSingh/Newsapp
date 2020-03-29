@@ -12,6 +12,7 @@ import SDWebImageSwiftUI
 
 struct TopHeadlinesCell: View {
     let article: Articles
+    @Binding var cellTapped: Bool
     @Binding var selectedArticle: Articles?
 
     var body: some View {
@@ -35,6 +36,7 @@ struct TopHeadlinesCell: View {
             Spacer()
         }.onTapGesture {
             self.selectedArticle = self.article
+            self.cellTapped.toggle()
         }
     }
 }

@@ -12,7 +12,7 @@ enum Operation: String {
     case GET, POST
 }
 class URlSession: NSObject {
-    private let APIKEY = "669fd7271d444d819fe80c0aac75a4a5"
+    private let APIKEY = "bc8e273c75094c8ab18c147961328758"// singh1@mailinator.com
     static let handler = URlSession()
     let cache = NSCache<AnyObject, AnyObject>()
 

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+let pageSize = 20
 enum Endpoints: String {
     case TopHeadings = "http://newsapi.org/v2/top-headlines?country="
     case Sources = "https://newsapi.org/v2/sources"

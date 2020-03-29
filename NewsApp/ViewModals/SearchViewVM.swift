@@ -13,13 +13,14 @@ class SearchViewVM : ObservableObject {
     @Published var loading = false
     @Published var showAlert = false
     @Published var showEmptyAlert = false
+    @Published var NoMoreRecords = false
 
-    func fetchNewsForSource(query: String) {
+    func fetchNewsForSource(query: String, page: Int = 1) {
         guard !query.isEmpty else {
             self.showEmptyAlert = true
             return
         }
-        guard let escapedString = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed), let url = URL(string: Endpoints.query.rawValue + escapedString) else {
+        guard let escapedString = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed), let url = URL(string: Endpoints.query.rawValue + escapedString + "&page=\(page)") else {
             self.showAlert = true
             return
         }
@@ -30,9 +31,12 @@ class SearchViewVM : ObservableObject {
             do {
                 self.queryNewsModal = try Helper.dataToCodable(data)
                 if let articles = self.queryNewsModal?.articles {
-                    self.articles = articles
-                    if self.articles.count == 0 {
-                        self.showAlert = true
+                    if self.articles.count > 0, page != 1 {
+                        print("previous count \(self.articles.count)")
+                        self.articles += articles
+                        print("previous count \(self.articles.count)")
+                    } else {
+                        self.articles = articles
                     }
                 }
             } catch {
@@ -40,5 +44,14 @@ class SearchViewVM : ObservableObject {
             }
             self.loading = false
         }
+    }
+    func fetchMoreNewsForSource(query: String) {
+        NoMoreRecords = false
+        guard let totalRecord = queryNewsModal?.totalResults, totalRecord > self.articles.count  else {
+            NoMoreRecords = true
+            return
+        }
+        let currentPage = self.articles.count/pageSize
+        fetchNewsForSource(query: query, page: currentPage+1)
     }
 }

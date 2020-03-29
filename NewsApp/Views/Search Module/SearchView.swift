@@ -23,7 +23,7 @@ struct SearchView: View {
                         .frame(minHeight: 40)
                         Button(action: {
                             self.searchViewVM.fetchNewsForSource(query: self.textToSearch)
-                            self.textToSearch = ""
+//                            self.textToSearch = ""
                             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                         }) {Text("Submit").font(.body).bold()}
                         Spacer()
@@ -35,6 +35,9 @@ struct SearchView: View {
                     LoadingView(isShowing: self.$searchViewVM.loading) {
                         List(self.searchViewVM.articles ) { article in
                             TopHeadlinesCell(article: article, cellTapped: self.$presentArticle, selectedArticle: self.$selectedArticle)
+                            .onAppear {
+                                self.listItemAppears(article)
+                            }
                         }
                     }
                     .alert(isPresented: self.$searchViewVM.showAlert) {
@@ -43,7 +46,9 @@ struct SearchView: View {
                     .alert(isPresented: self.$searchViewVM.showEmptyAlert) {
                         Alert(title: Text("Alert"), message: Text("Please enter some text!!"), dismissButton: .default(Text("Close")))
                     }
-
+                    .alert(isPresented: self.$searchViewVM.NoMoreRecords) {
+                        Alert(title: Text("Alert"), message: Text("No more results"), dismissButton: .default(Text("Close")))
+                    }
                 }
                 .navigationBarTitle(!self.searchViewVM.loading ? "Search": "Searching", displayMode: .inline)
                 .sheet(isPresented: self.$presentArticle) {
@@ -51,5 +56,12 @@ struct SearchView: View {
                 }
             }
 //        }
+    }
+}
+extension SearchView {
+    private func listItemAppears<Item: Identifiable>(_ item: Item) {
+        if searchViewVM.articles.isLastItem(item) {
+            searchViewVM.fetchMoreNewsForSource(query:textToSearch)
+        }
     }
 }

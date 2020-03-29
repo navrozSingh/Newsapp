@@ -12,23 +12,20 @@ struct ContentView: View {
     var body: some View {
         TabView(){
             TopHeadlines()
-            .tabItem {
+                .tabItem {
                     Image(systemName: "pencil.and.outline")
                     Text("Headlines")
-                }
-            
-                SourcesView()
+            }
+            SourcesView()
                 .tabItem {
                     Image(systemName: "antenna.radiowaves.left.and.right")
                     Text("Sources")
             }
-            
-                SearchView()
+            SearchView()
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                     Text("Sources")
             }
-
         }
     }
 }

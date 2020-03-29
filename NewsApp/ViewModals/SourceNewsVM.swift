@@ -12,13 +12,14 @@ class SourceNewsVM : ObservableObject {
     private var sourcesNewsModal: TopHeadlinesModal?
     @Published var articles = [Articles]()
     @Published var loading = true
+    @Published var NoMoreRecords = false
 
     init(forSource: Sources) {
         self.source = forSource
         //fetchNewsForSource()
     }
-    func fetchNewsForSource() {
-        guard let url = URL(string: Endpoints.SourcesNew.rawValue + source.stringID) else {
+    func fetchNewsForSource(page:Int = 1) {
+        guard let url = URL(string: Endpoints.SourcesNew.rawValue + source.stringID + "&page=\(page)") else {
             fatalError("Error in source URL")
         }
         loading = true
@@ -27,7 +28,13 @@ class SourceNewsVM : ObservableObject {
             do {
                 self.sourcesNewsModal = try Helper.dataToCodable(data)
                 if let articles = self.sourcesNewsModal?.articles {
-                    self.articles = articles
+                    if self.articles.count > 0, page != 1 {
+                        print("previous count \(self.articles.count)")
+                        self.articles += articles
+                        print("previous count \(self.articles.count)")
+                    } else {
+                        self.articles = articles
+                    }
                 }
             } catch {
                 print(error)
@@ -35,4 +42,14 @@ class SourceNewsVM : ObservableObject {
             self.loading = false
         }
     }
+    func fetchMoreNewsForSource() {
+        NoMoreRecords = false
+        guard let totalRecord = sourcesNewsModal?.totalResults, totalRecord > self.articles.count  else {
+            NoMoreRecords = true
+            return
+        }
+        let currentPage = self.articles.count/pageSize
+        fetchNewsForSource(page: currentPage+1)
+    }
 }
+

@@ -21,10 +21,10 @@ struct TopHeadlines: View {
                     LoadingView(isShowing: self.$topHeadlinesVM.loading) {
                         List(self.topHeadlinesVM.articles ) { article in
                             TopHeadlinesCell(article: article,cellTapped:self.$presentArticle  ,selectedArticle: self.$selectedArticle)
+                                .onAppear {
+                                    self.listItemAppears(article)
+                                }
                         }
-//                        .onTapGesture {
-//                            self.presentArticle.toggle()
-//                        }
                     }
                     .frame(width: geometry.size.width, height: geometry.size.height)
                     .offset(x: self.topHeadlinesVM.openMenu ? geometry.size.width/2 : 0)
@@ -36,6 +36,9 @@ struct TopHeadlines: View {
                     }
                 }.sheet(isPresented: self.$presentArticle) {
                     NewsDetails(article: self.selectedArticle!,showSheetView: self.$presentArticle)
+                }
+                .alert(isPresented: self.$topHeadlinesVM.NoMoreRecords) {
+                    Alert(title: Text("Alert"), message: Text("No more results"), dismissButton: .default(Text("Close")))
                 }
             }.onAppear(){
                 self.topHeadlinesVM.fetchHeadlines()
@@ -55,7 +58,13 @@ struct TopHeadlines: View {
         }
     }
 }
-
+extension TopHeadlines {
+    private func listItemAppears<Item: Identifiable>(_ item: Item) {
+        if topHeadlinesVM.articles.isLastItem(item) {
+            topHeadlinesVM.fetchMoreHeadlines()
+        }
+    }
+}
 
 //TODO: Gester implementation
 

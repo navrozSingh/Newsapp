@@ -23,6 +23,9 @@ struct SourceNews: View {
                 LoadingView(isShowing: self.$sourceNewsVM.loading) {
                     List(self.sourceNewsVM.articles ) { article in
                         TopHeadlinesCell(article: article, cellTapped: self.$presentArticle, selectedArticle: self.$selectedArticle)
+                        .onAppear {
+                            self.listItemAppears(article)
+                        }
                     }
 //                    .onTapGesture {
 //                        self.presentArticle.toggle()
@@ -35,5 +38,16 @@ struct SourceNews: View {
             .sheet(isPresented: self.$presentArticle) {
                 NewsDetails(article: self.selectedArticle!,showSheetView: self.$presentArticle)
             }
+        .alert(isPresented: self.$sourceNewsVM.NoMoreRecords) {
+            Alert(title: Text("Alert"), message: Text("No more results"), dismissButton: .default(Text("Close")))
+        }
+    }
+}
+
+extension SourceNews {
+    private func listItemAppears<Item: Identifiable>(_ item: Item) {
+        if sourceNewsVM.articles.isLastItem(item) {
+            sourceNewsVM.fetchMoreNewsForSource()
+        }
     }
 }
